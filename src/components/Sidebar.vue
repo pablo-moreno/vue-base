@@ -30,10 +30,15 @@ export default {
   top: 0;
   bottom: 0;
   z-index: 10;
-  width: 400px;
+  width: 480px;
   height: 100%;
   border-right: solid 1px #EAEAEA;
-  transition: left 0.125s ease-in;
+  box-shadow: 0 0 4px 0 lighten(grey, 35%);
+  transition: left 0.25s cubic-bezier(.77,0,.18,1);
+
+  @media only screen and (max-width: 720px) {
+    width: 300px;
+  }
 }
 
 .sidebar-visible {
@@ -41,7 +46,12 @@ export default {
 }
 
 .sidebar-hidden {
-  left: -400px;
+  left: -480px;
+
+  @media only screen and (max-width: 720px) {
+    left: -300px;
+  }
+
 }
 
 </style>
