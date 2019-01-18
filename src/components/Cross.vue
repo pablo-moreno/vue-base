@@ -15,21 +15,26 @@ export default {
 }
 </script>
 
-
 <style lang="scss" scoped>
 .cross {
-    width: 64px;
-    height: 64px;
+    width: 48px;
+    height: 48px;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     cursor: pointer;
+    border-radius: 50%;
+    transition: all 0.5s ease;
+
+    &:hover {
+      background-color: rgba(0, 0, 0, 0.2);
+      transform: rotate(-90deg);
+    }
 
     .bar {
       width: 32px;
       height: 4px;
-      background-color: white;
       border-radius: 2px;
     }
 

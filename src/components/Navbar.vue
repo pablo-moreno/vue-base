@@ -3,10 +3,16 @@
   class="navbar" 
   :class="{'is-fixed': fixed}"
   :style="{'background-color': backgroundColor, 'color': color}"
-
 >
-  <navbar-button @click.native="$emit('nav-action')" :active="active"  />
-  <h2> {{ title }} </h2>
+  <div class="navbar-start">
+    <navbar-button @action="$emit('nav-action')" type="arrow" :active="active"  />
+    <h2> {{ title }} </h2>
+  </div>
+  <div class="navbar-end">
+    <slot>
+
+    </slot>
+  </div>
 </nav>  
 </template>
 
@@ -50,6 +56,18 @@ export default {
   padding: 1em;
   display: flex;
   align-items: center;
+  z-index: 10;
+  justify-content: space-between;
+
+  &-start {
+    display: flex;
+    align-items: center;
+  }
+
+  &-end {
+    display: flex;
+    align-items: center;
+  }
 }
 
 .is-fixed {

@@ -8,8 +8,8 @@
     :style="{
       'border-top': `solid ${weight}px  ${color}`,
       'border-right': `solid ${weight}px  ${color}`,
-      'width': '8px',
-      'height': '8px'
+      'width': `${width}px`,
+      'height': `${height}px`
     }"
   >
   
@@ -47,7 +47,7 @@ export default {
 
 <style lang="scss" scoped>
 .arrow {
-  transition: transform 0.5s ease;
+  transition: transform 0.25s ease;
 }
 
 .top {

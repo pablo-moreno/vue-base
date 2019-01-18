@@ -60,11 +60,11 @@ export default {
 <style lang="scss" scoped>
 .sidebar-header {
   display: flex;
-  flex-direction: column;
   justify-content: space-between;
   height: 200px;
   background-size:cover;
-  border-bottom: solid 1px #EAEAEA;
+  flex-direction: column;
+
   
   &-image {
     width: 100%;
@@ -73,14 +73,22 @@ export default {
   .sidebar-title {
     display: flex;
     justify-content: flex-end;
+    
+    justify-content: center;
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    padding: 0.5em 2em;
   }
 
   .sidebar-action {
     display: flex;
+    padding: 16px;
   }
 
-  h2 {
-    margin: 64px;
+  h2, h4 {
+    margin: 0;
+    margin-bottom: 0.5em;
   }
 }
 </style>
