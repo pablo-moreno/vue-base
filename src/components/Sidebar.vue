@@ -1,4 +1,5 @@
 <template>
+<div>
   <section 
     class="sidebar" :class="[show ? 'sidebar-visible': 'sidebar-hidden']"
     :style="{'background-color': backgroundColor}"  
@@ -7,6 +8,10 @@
       
     </slot>
   </section>
+  <div class="out" :class="[show ? 'visible' : 'hidden']" @click="$emit('close-sidebar')">
+
+  </div>
+</div>
 </template>
 
 <script>
@@ -25,6 +30,16 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.out {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  z-index: 5;
+}
+
 .sidebar {
   position: fixed;
   top: 0;
@@ -53,7 +68,13 @@ export default {
   @media only screen and (max-width: 720px) {
     left: -300px;
   }
-
 }
 
+.hidden {
+  display: none;
+}
+
+.visible {
+  display: block;
+}
 </style>

@@ -44,7 +44,6 @@ export default {
 }
 </script>
 
-
 <style lang="scss" scoped>
 .arrow {
   transition: transform 0.25s ease;

@@ -1,5 +1,9 @@
 <template>
-<div class="main-content" :style="{'background-color': backgroundColor}">
+<div class="main-content" :style="{
+    'background-color': backgroundColor,
+    'margin-top': top
+  }"
+>
 <slot>
   
 </slot>
@@ -12,16 +16,18 @@ export default {
     backgroundColor: {
       type: String,
       default: 'white'
+    },
+    top: {
+      type: Number,
+      default: 80
     }
   }
 }
 </script>
 
-
 <style lang="scss">
 .main-content {
-  position: relative;
-  margin-top: 80px;
+  margin-top: 96px;
   width: 100%;
   height: 100%;
 }

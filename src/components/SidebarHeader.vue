@@ -8,8 +8,8 @@
     <cross @click.native="$emit('close-sidebar')" :color="titleColor" />
   </div>
   <div class="sidebar-title">
-    <h2 :style="{'color': titleColor}"> {{ title }} </h2>
-    <h4 :style="{'color': subtitleColor}"> {{ subtitle }} </h4>
+    <h1 :style="{'color': titleColor}"> {{ title }} </h1>
+    <h3 :style="{'color': subtitleColor}"> {{ subtitle }} </h3>
   </div>
 </header>
 </template>
@@ -86,7 +86,7 @@ export default {
     padding: 16px;
   }
 
-  h2, h4 {
+  h1, h3 {
     margin: 0;
     margin-bottom: 0.5em;
   }

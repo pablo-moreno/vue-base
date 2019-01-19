@@ -1,6 +1,7 @@
 const common = {
-  postItRed: '',
-
+  postItRed: '#e77b74',
+  postItGreen: '#90f090',
+  postItYellow: '#f8f875'
 }
 
 export default {
@@ -16,9 +17,9 @@ export default {
     secondary: '',
     primaryText: '#FAFAFA',
     secondaryText: '#F8F8F8',
-    primaryBackground: '#10171E',
-    secondaryBackground: '#1C2938',
-
+    background0: '#10171E',
+    background1: '#1C2938',
+    background2: '#15202b',
     ...common
   }
 }

@@ -6,7 +6,7 @@
   </div>
   <div class="collapsable-content" :style="{'color': color}" v-show="!collapsed">
     <slot>
-
+      <!-- Collapsable Content -->
     </slot>
   </div>
 </div>
@@ -61,7 +61,16 @@ export default {
     transition: display 0.25s ease;
     width: 100%;
     display: flex;
-    padding: 1em;
+
+    a {
+      width: 100%;
+      padding: 1em;
+      text-align: left;
+      
+      &.router-link-exact-active {
+        border-bottom: solid 1px #42b983;
+      }
+    }
     
   }
 }

@@ -12,7 +12,7 @@
 .grid-layout {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  grid-gap: 2em;
+  grid-gap: 3em;
   padding: 2em;
 
   @media only screen and (max-width: 1440px) {
