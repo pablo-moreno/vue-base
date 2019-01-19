@@ -1,6 +1,6 @@
 {
-  "name": "adopta",
-  "short_name": "adopta",
+  "name": "vue-base",
+  "short_name": "vue-base",
   "icons": [
     {
       "src": "./img/icons/android-chrome-192x192.png",

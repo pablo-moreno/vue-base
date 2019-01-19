@@ -1,4 +1,4 @@
-# adopta
+# vue-base
 
 ## Project setup
 ```

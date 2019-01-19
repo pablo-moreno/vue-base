@@ -1,6 +1,6 @@
 module.exports = {
   pwa: {
     workboxPluginMode: 'InjectManifest',
-    name: 'adopta'
+    name: 'vue-base'
   }
 }
