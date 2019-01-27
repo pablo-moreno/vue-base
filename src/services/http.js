@@ -3,26 +3,25 @@ import axios from 'axios'
 axios.defaults.headers['Access-Control-Allow-Origin'] = '*'
 axios.defaults.headers.common['Accept'] = 'application/json'
 axios.defaults.headers.common['Content-Type'] = 'application/json'
-axios.defaults.xsrfHeaderName = "X-CSRFTOKEN"
-axios.defaults.xsrfCookieName = "csrftoken"
+axios.defaults.xsrfHeaderName = 'X-CSRFTOKEN'
+axios.defaults.xsrfCookieName = 'csrftoken'
 
-export default class BaseHttp {
+export class BaseHttp {
   API_URL = ''
   HTTP_AUTHORIZATION_HEADER = ''
-  resource = ''
   token = ''
 
-  constructor(resource='', token='') {
-    this.resource = resource
-    this.token = token
+  constructor() {
+    this.token = ''
   }
 
-  /** 
-   * Returns a formatted url based on the resource variable
-   * @param {String} path Extended path
+  /**
+   * 
+   * @param {String} resource Resource
+   * @param {String} path     Extended path
    */
-  buildURL(path = '') {
-    return `${this.API_URL}/${this.resource}/${path}`
+  getUrl(resource, path = '') {
+    return `${this.API_URL}/${resource}/${path}`
   }
 
   /**
@@ -30,6 +29,14 @@ export default class BaseHttp {
    */
   getToken() {
     return this.token
+  }
+
+  /**
+   * Sets the token
+   * @param {String} token The token
+   */
+  setToken(token) {
+    this.token = token
   }
 
   /** 
@@ -54,13 +61,14 @@ export default class BaseHttp {
 
   /** 
    * Makes a HTTP request
-   * @param {String} method       HTTP Method
-   * @param {String} url          Target URL
-   * @param {Object} data         [Optional]: Body of the HTTP Post request
-   * @param {Object} params       [Optional]: HTTP GET Parameters
-   * @param {Object} extraConfig  [Optional]: Extra Axios configuration
-   * @param {Object} headers      [Optional]: HTTP requests headers
-   * @param {String} token        [Optional]: JWT Token
+   * @param {String} method             HTTP Method
+   * @param {String} url                Target URL
+   * @param {Object} data               [Optional]: Body of the HTTP Post request
+   * @param {Object} params             [Optional]: HTTP GET Parameters
+   * @param {Object} extraConfig        [Optional]: Extra Axios configuration
+   * @param {Object} headers            [Optional]: HTTP requests headers
+   * @param {String} token              [Optional]: JWT Token
+   * @param {String} responseProperty   [Optional]: Response property to return
    * 
    * @returns {Object}            Response data from the server
    * @throws                      Exception to be captured
@@ -81,9 +89,9 @@ export default class BaseHttp {
    * 
    * @param {Object} filters Filters applied
    */
-  async list(params={}) {
+  async list(resource, params={}) {
     const options = { params, token: this.token }
-    const url = this.buildURL()
+    const url = this.getUrl(resource)
 
     return await this.request('GET', url, options)
   }
@@ -92,9 +100,9 @@ export default class BaseHttp {
    * Creates a new resource 
    * @param {Object} data 
    */
-  async post(data) {
+  async post(resource, data) {
     const options = { data, token: this.token }
-    const url = this.buildURL()
+    const url = this.getUrl(resource)
 
     return await this.request('POST', url, options)
   }
@@ -103,9 +111,9 @@ export default class BaseHttp {
    * Gets a specified item
    * @param {Object} item 
    */
-  async get(id) {
+  async get(resource, id) {
     const options = { token: this.token }
-    const url = this.buildURL(id)
+    const url = this.getUrl(resource, id)
 
     return await this.request('GET', url, options)
   }
@@ -115,9 +123,9 @@ export default class BaseHttp {
    * @param id Item id
    * @param {Object} data 
    */
-  async put(id, data) {
+  async put(resource, id, data) {
     const options = { data, token: this.token }
-    const url = this.buildURL(id)
+    const url = this.getUrl(resource, id)
 
     return await this.request('PUT', url, options)
   }
@@ -126,9 +134,9 @@ export default class BaseHttp {
    * Deletes a specified item
    * @param {Object} item 
    */
-  async delete(id) {
+  async delete(resource, id) {
     const options = { token: this.token }
-    const url = this.buildURL(id)
+    const url = this.getUrl(resource, id)
 
     return await this.request('DELETE', url, options)
   }
@@ -139,7 +147,7 @@ export default class BaseHttp {
    * @param {String} type     File type
    */
   async download(url, params={}, headers={}) {
-    const options = { token: this.getToken(), params, config: { responseType: 'blob' }, headers }
+    const options = { token: this.token, params, config: { responseType: 'blob' }, headers }
 
     return await this.request('GET', url, options)
   }
@@ -149,11 +157,11 @@ export default class BaseHttp {
    * @param {File} file     The file to upload
    * @param {String} url    [Optional]: endpoint url
    */
-  async upload(file, url='') {
+  async upload(file, path='') {
     const formData = new FormData()
     formData.append('file', file)
-    const options = { token: this.getToken(), config: { formData } }
-    mUrl = this.buildURL(url)
+    const options = { token: this.token, config: { formData } }
+    const mUrl = this.getUrl(path)
 
     return await this.request('POST', mUrl, options)
   }
@@ -166,4 +174,10 @@ export default class BaseHttp {
 export default class Http extends BaseHttp {
   API_URL = `${process.env.BASE_URL}/${process.env.API_PREFIX}`
   HTTP_AUTHORIZATION_HEADER = process.env.HTTP_AUTHORIZATION_HEADER
+  
+  constructor() {
+    super()
+    const { token } = this.$store.state.auth.user
+    this.setToken(token)
+  }
 }
