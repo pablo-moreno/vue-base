@@ -13,7 +13,6 @@
 html, body, #app {
   position: relative;
   height: 100%;
-  overflow: auto;
 }
 
 body {

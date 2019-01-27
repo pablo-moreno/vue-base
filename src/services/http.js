@@ -6,9 +6,9 @@ axios.defaults.headers.common['Content-Type'] = 'application/json'
 axios.defaults.xsrfHeaderName = "X-CSRFTOKEN"
 axios.defaults.xsrfCookieName = "csrftoken"
 
-export default class Http {
+export default class BaseHttp {
   API_URL = ''
-  HTTP_AUTHORIZATION_HEADER = 'Token'
+  HTTP_AUTHORIZATION_HEADER = ''
   resource = ''
   token = ''
 
@@ -46,22 +46,10 @@ export default class Http {
    */
   _makeAxiosConfig(method, url, { data={}, params={}, extraConfig={}, headers={}, token='' }) {
     if (token) {
-      headers = {
-        ...headers,
-        'Authorization': `${HTTP_AUTHORIZATION_HEADER} ${token}`
-      }
+      headers = { ...headers, 'Authorization': `${this.HTTP_AUTHORIZATION_HEADER} ${token}` }
     }
 
-    const config = {
-      method,
-      url,
-      params,
-      data,
-      headers,
-      ...extraConfig,
-    }
-
-    return config
+    return { method,  url, params, data, headers, ...extraConfig, }
   }
 
   /** 
@@ -84,10 +72,6 @@ export default class Http {
       return response[responseProperty]
     } 
     catch (error) {
-      if (error.response.status === 401) {
-        console.log('error', 401)
-        // store.dispatch('LOGOUT')
-      }
       throw error
     }
   }
@@ -177,4 +161,9 @@ export default class Http {
   getBaseUrl() {
     return this.API_URL
   }
+}
+
+export default class Http extends BaseHttp {
+  API_URL = `${process.env.BASE_URL}/${process.env.API_PREFIX}`
+  HTTP_AUTHORIZATION_HEADER = process.env.HTTP_AUTHORIZATION_HEADER
 }
