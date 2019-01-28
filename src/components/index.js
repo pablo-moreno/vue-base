@@ -8,6 +8,7 @@ import _MainContent from './MainContent'
 import _Loading from './Loading'
 import _Navbar from './Navbar'
 import _NavbarButton from './NavbarButton'
+import _Paint from './Paint'
 import _PostIt from './PostIt'
 import _Sidebar from './Sidebar'
 import _SidebarContent from './SidebarContent'
@@ -24,6 +25,7 @@ export const Loading = _Loading
 export const MainContent = _MainContent
 export const Navbar = _Navbar
 export const NavbarButton = _NavbarButton
+export const Paint = _Paint
 export const PostIt = _PostIt
 export const Sidebar = _Sidebar
 export const SidebarContent = _SidebarContent

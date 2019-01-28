@@ -46,7 +46,7 @@ export default {
    * so the this.$el property is set at this point.
    */
   mounted() {
-    this.chart = new Chart(this.$el, {
+    this.chart = new Chart(this.$el.getContext('2d'), {
       data: this.data,
       options: this.options,
       title: this.title,

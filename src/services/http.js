@@ -174,10 +174,4 @@ export class BaseHttp {
 export default class Http extends BaseHttp {
   API_URL = `${process.env.BASE_URL}/${process.env.API_PREFIX}`
   HTTP_AUTHORIZATION_HEADER = process.env.HTTP_AUTHORIZATION_HEADER
-  
-  constructor() {
-    super()
-    const { token } = this.$store.state.auth.user
-    this.setToken(token)
-  }
 }

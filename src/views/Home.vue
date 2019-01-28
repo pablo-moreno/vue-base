@@ -97,6 +97,7 @@
           </card>
 
         </grid-layout>
+        <paint />
 
       </div>
       <vue-footer :color="theme.primaryText" :background-color="theme.background2">
@@ -116,6 +117,7 @@ import {
   Footer as VueFooter,
   MainContent,
   Navbar,
+  Paint,
   PostIt,
   Sidebar,
   SidebarContent,
@@ -144,6 +146,7 @@ export default {
     GridLayout, 
     MainContent,
     Navbar,
+    Paint,
     PostIt,
     Sidebar,
     SidebarContent,

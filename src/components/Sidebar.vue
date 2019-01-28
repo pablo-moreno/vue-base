@@ -37,14 +37,14 @@ export default {
   width: 100%;
   height: 100%;
   background-color: rgba(0, 0, 0, 0.6);
-  z-index: 5;
+  z-index: 15;
 }
 
 .sidebar {
   position: fixed;
   top: 0;
   bottom: 0;
-  z-index: 10;
+  z-index: 15;
   width: 480px;
   height: 100%;
   
