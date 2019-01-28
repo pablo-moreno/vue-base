@@ -4,7 +4,6 @@
   <header>
     <button @click="clear">Clear</button>
     <input type="color" name="color-selector" v-model="color">
-    <h2>x: {{ x }} : y: {{ y }} </h2>
   </header>
   <canvas ref="the-canvas" @mousedown="mouseDown" @mousemove="mouseMove" @mouseup="mouseUp" @mouseleave="mouseLeave">
 
@@ -24,8 +23,6 @@ export default {
       color: '#df4b26',
       lineStyle: 'round',
       lineWidth: 5,
-      x: 0,
-      y: 0,
     }
   },
   mounted() {
@@ -35,9 +32,9 @@ export default {
     getMousePosition(event) {
       const canvas = this.$refs['the-canvas']
       const rect = canvas.getBoundingClientRect()
-      this.x = event.clientX - rect.left
-      this.y = event.clientY - rect.top
-      return [this.x, this.y]
+      const x = event.clientX - rect.left
+      const y = event.clientY - rect.top
+      return [x, y]
     },
     mouseDown(event) {
       const [x, y] = this.getMousePosition(event)
@@ -83,6 +80,7 @@ export default {
         else {
           this.context.moveTo(this.clickX[i] - 1, this.clickY[i])
         }
+        
         this.context.lineTo(this.clickX[i], this.clickY[i])
         this.context.closePath()
         this.context.stroke()
