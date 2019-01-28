@@ -3,6 +3,8 @@
 <div>
   <header>
     <button @click="clear">Clear</button>
+    <input type="color" name="color-selector" v-model="color">
+    <h2>x: {{ x }} : y: {{ y }} </h2>
   </header>
   <canvas ref="the-canvas" @mousedown="mouseDown" @mousemove="mouseMove" @mouseup="mouseUp" @mouseleave="mouseLeave">
 
@@ -21,22 +23,27 @@ export default {
       clickDrag: [],
       color: '#df4b26',
       lineStyle: 'round',
-      lineWidth: 5
+      lineWidth: 5,
+      x: 0,
+      y: 0,
     }
   },
   mounted() {
     this.context = this.$refs['the-canvas'].getContext('2d')
   },
   methods: {
+    getMousePosition(event) {
+      const canvas = this.$refs['the-canvas']
+      const rect = canvas.getBoundingClientRect()
+      this.x = event.clientX - rect.left
+      this.y = event.clientY - rect.top
+      return [this.x, this.y]
+    },
     mouseDown(event) {
-      let offsetLeft = this.$refs['the-canvas'].offsetLeft
-      let offsetTop = this.$refs['the-canvas'].offsetTop
-      let x = event.pageX - offsetLeft
-      let y = event.pageY - offsetTop
+      const [x, y] = this.getMousePosition(event)
 
       console.log('x', x)
       console.log('y', y)
-
 
       this.paint = true
       this.addClick(x, y)
@@ -44,10 +51,8 @@ export default {
     },
     mouseMove(event) {
       if (this.paint) {
-        let offsetLeft = this.$refs['the-canvas'].offsetLeft
-        let offsetTop = this.$refs['the-canvas'].offsetTop
-        let x = event.pageX - offsetLeft
-        let y = event.pageY - offsetTop
+        const [x, y] = this.getMousePosition(event)
+
         this.addClick(x, y, true)
         this.redraw()
       }
