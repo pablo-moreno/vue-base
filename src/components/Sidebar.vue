@@ -30,6 +30,11 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+a {
+  &.router-link-exact-active {
+    background-color: rgba(0, 0, 0, .2);
+  }
+}
 .out {
   position: fixed;
   top: 0;
@@ -45,7 +50,7 @@ export default {
   top: 0;
   bottom: 0;
   z-index: 15;
-  width: 480px;
+  width: 360px;
   height: 100%;
   
   transition: left 0.25s cubic-bezier(.77,0,.18,1);
@@ -63,7 +68,7 @@ export default {
 }
 
 .sidebar-hidden {
-  left: -480px;
+  left: -360px;
 
   @media only screen and (max-width: 720px) {
     left: -300px;

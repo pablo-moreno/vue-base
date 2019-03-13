@@ -21,5 +21,12 @@ export default {
     background1: '#1C2938',
     background2: '#15202b',
     ...common
+  }, 
+  custom: {
+    primary: '',
+    secondary: '',
+    primaryText: '',
+    secondaryText: '',
+    ...common
   }
 }

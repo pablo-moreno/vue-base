@@ -59,16 +59,18 @@ export default {
 
   &-content {
     transition: display 0.25s ease;
-    width: 100%;
     display: flex;
+    flex-direction: column;
 
     a {
       width: 100%;
       padding: 1em;
       text-align: left;
+      box-sizing: border-box;
       
       &.router-link-exact-active {
-        border-bottom: solid 1px #42b983;
+        color: #42b983;
+        background-color: rgba(0, 0, 0, .2);
       }
     }
     

@@ -1,39 +1,9 @@
 <template>
   <div class="home">
-    
-    <sidebar :show="showSidebar" :background-color="theme.background0" @close-sidebar="showSidebar = !showSidebar">
-      <sidebar-header 
-        :background-color="theme.background1"
-        title="Title"
-        :title-color="theme.primaryText"
-        subtitle="Subtitle"
-        :subtitle-color="theme.secondaryText"
-        @close-sidebar="toggle"
-      />
-      <sidebar-content>
-        <router-link to="/">
-          Inicio
-        </router-link>
-        <collapsable title="Item 1" :titleColor="theme.primaryText" :color="theme.primaryText" >
-          
-        </collapsable>
-      </sidebar-content>
-
-    </sidebar>
-    <navbar 
-      @nav-action="toggle" 
-      title="My awesome Vuepage :D" 
-      :active="showSidebar" 
-      :background-color="theme.background1" 
-      :color="theme.primaryText"
-    />
-
     <main-content :background-color="theme.background0">
       <div>
-
         <h1 :style="{'color': theme.primaryText}">Post-Its</h1>
         <grid-layout>
-
           <post-it :background-color="theme.postItRed">
             <header class="post-it-header">
               <img src="" alt="" sizes="" srcset="">
@@ -97,7 +67,10 @@
           </card>
 
         </grid-layout>
-        <paint />
+
+        <theme-picker :themes="themes" />
+        
+        <paint :width="480" :height="300" />
 
       </div>
       <vue-footer :color="theme.primaryText" :background-color="theme.background2">
@@ -112,7 +85,6 @@
 <script>
 import {
   Card,
-  Collapsable,
   GridLayout, 
   Footer as VueFooter,
   MainContent,
@@ -122,6 +94,7 @@ import {
   Sidebar,
   SidebarContent,
   SidebarHeader,
+  ThemePicker,
 } from '@/components'
 import themes from '@/themes'
 
@@ -131,7 +104,8 @@ export default {
     return {
       showSidebar: false,
       arrowDirection: 'left',
-      theme: themes.dark
+      theme: themes.dark,
+      themes
     }
   },
   methods: {
@@ -141,22 +115,16 @@ export default {
   },
   components: {
     Card,
-    Collapsable,
-    VueFooter,
     GridLayout, 
     MainContent,
-    Navbar,
     Paint,
     PostIt,
-    Sidebar,
-    SidebarContent,
-    SidebarHeader,
+    ThemePicker,
+    VueFooter,
   }
 }
 </script>
 
 <style lang="scss" scoped>
-.home {
-  height: 100%;
-}
+
 </style>

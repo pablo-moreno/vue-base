@@ -27,7 +27,7 @@ export default {
 
 <style lang="scss">
 .main-content {
-  margin-top: 96px;
+  margin-top: 64px;
   width: 100%;
   height: 100%;
   display: flex;

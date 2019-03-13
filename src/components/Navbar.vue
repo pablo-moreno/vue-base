@@ -52,8 +52,7 @@ export default {
 <style lang="scss" scoped>
 .navbar {
   width: 100%;
-  height: 64px;
-  padding: 1em;
+  padding: .5em;
   display: flex;
   align-items: center;
   z-index: 10;
@@ -62,6 +61,10 @@ export default {
   &-start {
     display: flex;
     align-items: center;
+
+    h2 {
+      padding: 0 .5em;
+    }
   }
 
   &-end {

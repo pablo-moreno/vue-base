@@ -13,12 +13,13 @@
   width: 100%;
   height: 100%;
   background-color: inherit;
+  text-align: start;
 
   a {
     padding: 1rem;
 
     &.router-link-exact-active {
-      border-bottom: solid 1px #42b983;
+      background-color: rgba(0, 0, 0, 0.2);
       color: #42b983;
     }
   }

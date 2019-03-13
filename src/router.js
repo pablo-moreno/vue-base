@@ -10,27 +10,17 @@ export default new Router({
     {
       path: '/',
       name: 'home',
-      component: () => import('./views/Home'),
+      component: () => import('./App'),
       children: [
         {
-          path: '/pets',
-          name: 'pets',
-          component: () => ('./views/Pets')
+          path: '/',
+          name: 'home',
+          component: () => import('./views/Home')
         },
         {
-          path: '/pets/:id',
-          name: 'petDetail',
-          component: () => import('./views/PetDetail')
-        },
-        {
-          path: '/organizations',
-          name: 'organizations',
-          component: () => ('./views/Organizations')
-        },
-        {
-          path: '/organizations/:id',
-          name: 'organizationDetail',
-          component: () => import('./views/OrganizationDetail')
+          path: '/chat',
+          name: 'chat',
+          component: () => import('./views/ChatView')
         },
       ]
     },
