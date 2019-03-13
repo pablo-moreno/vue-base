@@ -4,10 +4,11 @@
   <header>
     <div class="paint-header" :style="{'width': `${width}px`}" >
       <div class="color-list">
-        <div class="paint-color" v-for="(mColor, i) in colors" :key="`color-${i}`" @click="color = mColor" :style="{'background': mColor}" />
+        <div class="paint-color" v-for="(mColor, i) in colors" :key="`color-${i}`" @click="color = mColor" :style="{'background': mColor, 'width': '32px', 'height': '32px'}" />
       </div>
-      <div>
+      <div class="paint-inputs">
         <input type="color" name="color-selector" v-model="color" @change="saveColor">
+        <button @click="clear">Clear</button>
         <button @click="saveImage">Save</button>
       </div>
     </div>
@@ -21,9 +22,14 @@
     @mouseleave="mouseLeave"
     :style="{'width': `${width}px`, 'height': `${height}px`}"
   >
-  <a style="display: none" ref="download-link" />
+
   </canvas>
-  <!-- <button @click="clear">Clear</button> -->
+  <a style="display: none" ref="download-link" />
+  <footer :style="{'width': `${width}px`}" >
+    <div class="paint-color" :style="{'background': color, 'width': '5px', 'height': '5px'}"></div>
+    <input class="slider" type="range" :min="5" :max="32" v-model="lineWidth" />
+    <div class="paint-color" :style="{'background': color, 'width': '32px', 'height': '32px'}"></div>
+  </footer>
 </div>
 </template>
 
@@ -46,13 +52,13 @@ export default {
       clicks: [],
       color: '#df4b26',
       colors: [
-        '#df4b26',
-        '#235b26',
-        '#982828',
-        '#cfcfcf',
+        '#00ff00',
+        '#0044ff',
+        '#ffff00',
+        '#AD4530',
       ],
       lineStyle: 'round',
-      lineWidth: 5,
+      lineWidth: 25,
       rect: undefined,
     }
   },
@@ -76,14 +82,14 @@ export default {
       const [x, y] = this.getMousePosition(event)
 
       this.paint = true
-      this.addClick(x, y, this.color, false)
+      this.addClick(x, y, this.color, this.lineWidth, false)
       this.redraw()
     },
     mouseMove(event) {
       if (this.paint) {
         const [x, y] = this.getMousePosition(event)
 
-        this.addClick(x, y, this.color, true)
+        this.addClick(x, y, this.color, this.lineWidth, true)
         this.redraw()
       }
     },
@@ -93,8 +99,8 @@ export default {
     mouseLeave(event) {
       this.paint = false
     },
-    addClick(x, y, color, drag) {
-      this.clicks.push({ x, y, color, drag })
+    addClick(x, y, color, lineWidth, drag) {
+      this.clicks.push({ x, y, color, lineWidth, drag })
     },
     redraw() {
       const canvas = this.$refs['the-canvas']
@@ -102,12 +108,12 @@ export default {
       this.context.clearRect(0, 0, rect.width, rect.height)
       
       this.context.lineJoin = this.lineStyle
-      this.context.lineWidth = this.lineWidth
       this.context.fillStyle = 'white'
       this.context.fillRect(0, 0, canvas.width, canvas.height)
 
       this.clicks.forEach((click, i) => {
         this.context.strokeStyle = click.color
+        this.context.lineWidth = click.lineWidth
         this.context.beginPath()
 
         if (click.drag && i > 0) {
@@ -116,7 +122,7 @@ export default {
         else {
           this.context.moveTo(this.clicks[i].x - 1, this.clicks[i].y)
         }
-        
+
         this.context.lineTo(this.clicks[i].x, this.clicks[i].y)
         this.context.closePath()
         this.context.stroke()
@@ -145,6 +151,13 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.paint {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
 header {
   display: flex;
   justify-content: center;
@@ -156,11 +169,10 @@ canvas {
 }
 
 .paint-color {
-  width: 32px;
-  height: 32px;
   border-radius: 50%;
   cursor: pointer;
-  margin: 0 0.5em 0.5em 0;
+  display: flex;
+  margin: .5em .25em;
 }
 
 .paint-header {
@@ -169,8 +181,48 @@ canvas {
   flex-direction: row;
 }
 
+.paint-inputs {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+}
+
 .color-list {
   display: flex;
   flex-wrap: wrap;
+}
+
+footer {
+  margin-top: 1em;
+  display: flex;
+  align-items: center;
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 90%;
+  height: 4px;
+  border-radius: 5px;  
+  outline: none;
+  opacity: 0.8;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+  
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%; 
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  cursor: pointer;
 }
 </style>
