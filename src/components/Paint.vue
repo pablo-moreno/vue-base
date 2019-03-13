@@ -8,7 +8,7 @@
       </div>
       <div>
         <input type="color" name="color-selector" v-model="color" @change="saveColor">
-        <button @click="saveColor">Save</button>
+        <button @click="saveImage">Save</button>
       </div>
     </div>
   </header>
@@ -21,6 +21,7 @@
     @mouseleave="mouseLeave"
     :style="{'width': `${width}px`, 'height': `${height}px`}"
   >
+  <a style="display: none" ref="download-link" />
   </canvas>
   <!-- <button @click="clear">Clear</button> -->
 </div>
@@ -61,8 +62,6 @@ export default {
     canvas.height = this.height
     
     this.context = canvas.getContext('2d')
-    this.context.fillStyle = 'white'
-    this.context.fillRect(0, 0, canvas.width, canvas.height)
   },
   methods: {
     getMousePosition(event) {
@@ -104,6 +103,8 @@ export default {
       
       this.context.lineJoin = this.lineStyle
       this.context.lineWidth = this.lineWidth
+      this.context.fillStyle = 'white'
+      this.context.fillRect(0, 0, canvas.width, canvas.height)
 
       this.clicks.forEach((click, i) => {
         this.context.strokeStyle = click.color
@@ -115,7 +116,7 @@ export default {
         else {
           this.context.moveTo(this.clicks[i].x - 1, this.clicks[i].y)
         }
-
+        
         this.context.lineTo(this.clicks[i].x, this.clicks[i].y)
         this.context.closePath()
         this.context.stroke()
@@ -129,6 +130,15 @@ export default {
     saveColor() {
       if (this.colors.indexOf(this.color) === -1)
         this.colors.push(this.color)
+    },
+    saveImage() {
+      const canvas = this.$refs['the-canvas']
+      const data = canvas.toDataURL("image/jpeg").replace("image/jpeg", "image/octet-stream")
+      const downloadLink = this.$refs['download-link']
+
+      downloadLink.setAttribute('href', data) 
+      downloadLink.setAttribute('download', 'file.jpg')
+      downloadLink.click()
     }
   }
 }
