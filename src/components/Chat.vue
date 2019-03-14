@@ -1,5 +1,6 @@
 <template>
 <div class="chat">
+  <chat-message />
   <chat-input />
 </div>
 </template>

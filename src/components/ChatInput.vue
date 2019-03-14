@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { BaseType } from '../mixins'
+import BaseType from '../mixins/BaseStyle'
 export default {
   mixins: [BaseType],
 

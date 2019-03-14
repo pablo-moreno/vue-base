@@ -21,9 +21,7 @@
     @mouseup="mouseUp" 
     @mouseleave="mouseLeave"
     :style="{'width': `${width}px`, 'height': `${height}px`}"
-  >
-
-  </canvas>
+  />
   <a style="display: none" ref="download-link" />
   <footer :style="{'width': `${width}px`}" >
     <div class="paint-color" :style="{'background': color, 'width': '5px', 'height': '5px'}"></div>
@@ -213,15 +211,15 @@ footer {
 .slider::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  width: 25px;
-  height: 25px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%; 
   cursor: pointer;
 }
 
 .slider::-moz-range-thumb {
-  width: 25px;
-  height: 25px;
+  width: 16px;
+  height: 16px;
   border-radius: 50%;
   cursor: pointer;
 }
