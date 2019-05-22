@@ -17,7 +17,7 @@
             <footer></footer>
           </post-it>
 
-          <post-it  :background-color="theme.postItYellow">
+          <post-it :background-color="theme.postItYellow">
             <header class="post-it-header">
               <img src="" alt="" sizes="" srcset="">
             </header>
@@ -53,20 +53,25 @@
                 Lorem ipsum dolor sit, amet consectetur adipisicing elit. Nulla, delectus ad beatae distinctio quaerat suscipit consequuntur numquam consequatur natus sequi temporibus quis quasi labore excepturi necessitatibus, voluptatem provident laboriosam expedita?
               </section>
             </div>
-            <footer></footer>
+            <footer>
+            </footer>
           </post-it>
 
         </grid-layout>
         <h1 :style="{'color': theme.primaryText}">Cards</h1>
         <grid-layout>
-
           <card title="Card 1">
             <div>
               This is the card content
             </div>
           </card>
-
         </grid-layout>
+        <h1 :style="{'color': theme.primaryText}">
+          Components
+        </h1>
+        <section>
+          <toggle-switch title="This is a toggle switch" />
+        </section>
 
         <theme-picker :themes="themes" />
         
@@ -95,11 +100,12 @@ import {
   SidebarContent,
   SidebarHeader,
   ThemePicker,
+  ToggleSwitch,
 } from '@/components'
 import themes from '@/themes'
 
 export default {
-  name: "home",
+  name: 'home',
   data() {
     return {
       showSidebar: false,
@@ -119,6 +125,7 @@ export default {
     MainContent,
     Paint,
     PostIt,
+    ToggleSwitch,
     ThemePicker,
     VueFooter,
   }

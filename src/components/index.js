@@ -15,6 +15,7 @@ import _Sidebar from './Sidebar'
 import _SidebarContent from './SidebarContent'
 import _SidebarHeader from './SidebarHeader'
 import _Slider from './Slider'
+import _ToggleSwitch from './ToggleSwitch'
 import _ThemePicker from './ThemePicker'
 
 export const Arrow = _Arrow
@@ -34,4 +35,5 @@ export const Sidebar = _Sidebar
 export const SidebarContent = _SidebarContent
 export const SidebarHeader = _SidebarHeader
 export const Slider = _Slider
+export const ToggleSwitch = _ToggleSwitch
 export const ThemePicker = _ThemePicker

@@ -2,7 +2,6 @@
 <div class="grid-layout">
   <slot>
     
-    
   </slot>  
 </div>  
 </template>

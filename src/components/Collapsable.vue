@@ -61,6 +61,7 @@ export default {
     transition: display 0.25s ease;
     display: flex;
     flex-direction: column;
+    transition: display .5s ease;
 
     a {
       width: 100%;
