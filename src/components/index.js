@@ -1,4 +1,5 @@
 import _Arrow from './Arrow'
+import _BarChart from './BarChart'
 import _Card from './Card'
 import _Chat from './Chat'
 import _Collapsable from './Collapsable'
@@ -19,6 +20,7 @@ import _ToggleSwitch from './ToggleSwitch'
 import _ThemePicker from './ThemePicker'
 
 export const Arrow = _Arrow
+export const BarChart = _BarChart
 export const Card = _Card
 export const Chat = _Chat
 export const Collapsable = _Collapsable

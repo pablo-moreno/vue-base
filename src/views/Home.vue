@@ -77,7 +77,10 @@
         
         <paint :width="480" :height="300" />
 
+        <bar-chart title="Agentes responsables del cambio climático" :items="chartItems" />
+
       </div>
+      
       <vue-footer :color="theme.primaryText" :background-color="theme.background2">
         <div>
           Made with ❤️ by @spooky.dev
@@ -89,6 +92,7 @@
 
 <script>
 import {
+  BarChart,
   Card,
   GridLayout, 
   Footer as VueFooter,
@@ -108,6 +112,19 @@ export default {
   name: 'home',
   data() {
     return {
+      chartItems: [{
+        id: 1,
+        value: 53,
+        description: 'Hidrocarburos 53%',
+      }, {
+        id: 2,
+        value: 23,
+        description: 'Plásticos 23%',
+      },{
+        id: 3, 
+        value: 21,
+        description: 'Residuos orgánicos 21%',
+      }],
       showSidebar: false,
       arrowDirection: 'left',
       theme: themes.dark,
@@ -120,6 +137,7 @@ export default {
     },
   },
   components: {
+    BarChart,
     Card,
     GridLayout, 
     MainContent,
